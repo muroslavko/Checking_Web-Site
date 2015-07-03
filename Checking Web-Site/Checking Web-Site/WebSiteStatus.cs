@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
+//using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,38 +12,38 @@ namespace Checking_Web_Site
     {
         private static string _webSite;
         private static int _attempts;
-        Ping _pinger;
         IPrint[] _print;
+        private static IResponse _response = new PingRespose();
+        [Inject]
+        public IResponse Response
+        {
+            get { return _response; }
+            set { _response = value; }
+        }
         static WebSiteStatus()
         {
-            _webSite = "dou.ua";
+            _webSite = "http://dou.ua";
             _attempts = 5;
         }
         public WebSiteStatus(IPrint[] print)
         {
             _print = print;
-            _pinger = new Ping();
         }
 
         public void CheckStatus()
         {
             try
             {
-                PingReply Reply = _pinger.Send(_webSite);
-                for (int i = 0; i < _attempts; i++)
+                foreach (var p in _print)
                 {
-                    foreach (var p in _print)
-                    {
-                        p.Print(String.Format("Ping {0}: {1}", _webSite, Reply.Status));
-                    }
+                    p.Print(Response.Test(_webSite, _attempts));
                 }
-                //_print.Print(String.Format("Ping {0}: {1}", _webSite, Reply.Status));
             }
             catch (Exception e)
             {
                 foreach (var p in _print)
                 {
-                    p.Print(e.Message);
+                    p.Print(new StringBuilder(e.Message));
                 }
             }
 

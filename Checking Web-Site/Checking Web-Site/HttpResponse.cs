@@ -20,7 +20,7 @@ namespace Checking_Web_Site
                 for (int i = 0; i < attempts; i++)
                 {
                     response = (HttpWebResponse)request.GetResponse();
-                    str.Append(String.Format("Ping {0}: {1}", webSite, response.StatusDescription));
+                    str.AppendLine(String.Format("Web Request {0}: {1}", webSite, response.StatusDescription));
                 }
                 //_print.Print(String.Format("Ping {0}: {1}", _webSite, Reply.Status));
             }

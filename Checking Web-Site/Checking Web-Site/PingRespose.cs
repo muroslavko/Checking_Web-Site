@@ -9,7 +9,7 @@ namespace Checking_Web_Site
 {
     class PingRespose : IResponse
     {
-        private Ping _pinger;
+        private Ping _pinger = new Ping();
 
         public StringBuilder Test(string webSite, int attempts)
         {
@@ -19,7 +19,7 @@ namespace Checking_Web_Site
                 for (int i = 0; i < attempts; i++)
                 {
                     PingReply Reply = _pinger.Send(webSite);
-                    str.Append(String.Format("Ping {0}: {1}", webSite, Reply.Status));
+                    str.AppendLine(String.Format("Ping {0}: {1}", webSite, Reply.Status));
                 }
                 //_print.Print(String.Format("Ping {0}: {1}", _webSite, Reply.Status));
             }
