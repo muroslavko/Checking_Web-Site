@@ -9,14 +9,18 @@ namespace Checking_Web_Site
 {
     class WebSiteStatus
     {
-        public string WebSite { get; set; }
+        private static string _webSite;
+        private static int _attempts;
         Ping _pinger;
-        IPrint _print;
-
-        public WebSiteStatus(IPrint print)
+        IPrint[] _print;
+        static WebSiteStatus()
+        {
+            _webSite = "dou.ua";
+            _attempts = 5;
+        }
+        public WebSiteStatus(IPrint[] print)
         {
             _print = print;
-            WebSite = "dou.ua";
             _pinger = new Ping();
         }
 
@@ -24,19 +28,40 @@ namespace Checking_Web_Site
         {
             try
             {
-                PingReply Reply =_pinger.Send(WebSite);
-                //foreach (var p in _print)
-                //{
-                //    p.Print( String.Format("Ping {0}: {1}", WebSite, Reply.Status));
-                //}
-                _print.Print( String.Format("Ping {0}: {1}", WebSite, Reply.Status));
+                PingReply Reply = _pinger.Send(_webSite);
+                for (int i = 0; i < _attempts; i++)
+                {
+                    foreach (var p in _print)
+                    {
+                        p.Print(String.Format("Ping {0}: {1}", _webSite, Reply.Status));
+                    }
+                }
+                //_print.Print(String.Format("Ping {0}: {1}", _webSite, Reply.Status));
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
-                _print.Print(e.Message);
+                foreach (var p in _print)
+                {
+                    p.Print(e.Message);
+                }
             }
 
         }
 
+
+        public void ChangeWebSite()
+        {
+            Console.WriteLine("******************************");
+            Console.WriteLine("Input web-site address");
+            _webSite = Console.ReadLine();
+            Console.WriteLine("******************************");
+        }
+        public void ChangeAttempts()
+        {
+            Console.WriteLine("******************************");
+            Console.WriteLine("Input web-site checking attempts");
+            _attempts = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("******************************");
+        }
     }
 }

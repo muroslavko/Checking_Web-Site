@@ -9,9 +9,14 @@ namespace Checking_Web_Site
 {
     class PrintToFile : IPrint
     {
+        public PrintToFile()
+        {
+            using (StreamWriter file = new StreamWriter("1.txt",false))
+            {} 
+        }
         public void Print(string s)
         {
-            using (StreamWriter file = new StreamWriter("1.txt"))
+            using (StreamWriter file = new StreamWriter("1.txt",true))
             {
                 file.WriteLine(s);
             }
