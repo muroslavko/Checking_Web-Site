@@ -8,6 +8,6 @@ namespace Checking_Web_Site
 {
     interface IPrint
     {
-        void Print(string s);
+        void Print(StringBuilder s);
     }
 }

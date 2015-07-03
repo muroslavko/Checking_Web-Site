@@ -14,7 +14,7 @@ namespace Checking_Web_Site
             using (StreamWriter file = new StreamWriter("1.txt",false))
             {} 
         }
-        public void Print(string s)
+        public void Print(StringBuilder s)
         {
             using (StreamWriter file = new StreamWriter("1.txt",true))
             {

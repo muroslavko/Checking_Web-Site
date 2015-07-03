@@ -8,7 +8,7 @@ namespace Checking_Web_Site
 {
     class PrintToConsole : IPrint
     {
-        public void Print(string s)
+        public void Print(StringBuilder s)
         {
             Console.WriteLine(s);
         }
