@@ -22,7 +22,7 @@ namespace Checking_Web_Site
         }
         static WebSiteStatus()
         {
-            _webSite = "http://dou.ua";
+            _webSite = "dou.ua";
             _attempts = 5;
         }
         public WebSiteStatus(IPrint[] print)

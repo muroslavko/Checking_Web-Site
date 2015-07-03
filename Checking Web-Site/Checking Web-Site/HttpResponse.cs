@@ -13,6 +13,7 @@ namespace Checking_Web_Site
         public StringBuilder Test(string webSite, int attempts)
         {
             StringBuilder str = new StringBuilder();
+            webSite = "http://" + webSite;
             WebRequest request = WebRequest.Create(webSite);
             HttpWebResponse response;
             try
