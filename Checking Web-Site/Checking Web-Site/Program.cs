@@ -49,16 +49,21 @@ namespace Checking_Web_Site
             IoC.Init((kernel) =>
             {
                 kernel.Bind<IPrint>().To<PrintToConsole>().InTransientScope();// default
+                kernel.Bind<IResponse>().To<PingRespose>().InTransientScope();
             });
         }
         public static void iocChange()
         {
+            IoC.Reset();
             Console.WriteLine("******************************");
             Console.WriteLine("To print log to console type c");
             Console.WriteLine("To print log to file type f");
             Console.WriteLine("To print log both ways type b");
-            IoC.Reset();
             string input = Console.ReadLine();
+            Console.WriteLine("******************************");
+            Console.WriteLine("To check web-site over ping type p");
+            Console.WriteLine("To check web-site over Http Request type h");
+            string inputResponse = Console.ReadLine();
             Console.WriteLine("******************************");
             IoC.Init((kernel) =>
             {
@@ -75,7 +80,21 @@ namespace Checking_Web_Site
                         kernel.Bind<IPrint>().To<PrintToFile>().InTransientScope();
                         break;
                     default:
-                        Console.WriteLine("Wrong input");
+                        Console.WriteLine("Wrong print input, use default");
+                        kernel.Bind<IPrint>().To<PrintToConsole>().InTransientScope();
+                        break;
+                }
+                switch (inputResponse)
+                {
+                    case "p":
+                        kernel.Bind<IResponse>().To<PingRespose>().InTransientScope();
+                        break;
+                    case "h":
+                        kernel.Bind<IResponse>().To<HttpResponse>().InTransientScope();
+                        break;
+                    default:
+                        Console.WriteLine("Wrong print input, use default");
+                        kernel.Bind<IResponse>().To<PingRespose>().InTransientScope();
                         break;
                 }
             });
