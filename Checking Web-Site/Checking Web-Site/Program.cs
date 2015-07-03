@@ -10,21 +10,82 @@ namespace Checking_Web_Site
     {
         static void Main(string[] args)
         {
-            iocInit();
+            iocInit(PrintType.Console);
 
-            var obj = IoC.Get<WebSiteStatus>();
+            var check = IoC.Get<WebSiteStatus>();
+            string userInput;
+            do
+            {
+                userInput= Menu.ShowMenu();
+                switch (userInput)
+                {
+                    case "w":
+                        check.ChangeWebSite();
+                        break;
+                    case "p":
+                        iocChange();
+                        break;
+                    default:
+                        Console.WriteLine("Wrong input");
+                        break;
+                }
+            } while (userInput == "e");
 
-            obj.CheckStatus();
+
+            //iocInit();
+
+            check = IoC.Get<WebSiteStatus>();
+
+            check.CheckStatus();
             Console.ReadLine();
         }
 
-        private static void iocInit()
+        private static void iocInit(PrintType a)
         {
+            IoC.Reset();
             IoC.Init((kernel) =>
             {
-                    kernel.Bind<IPrint>().To<PrintToConsole>().InTransientScope(); // default
-                    //kernel.Bind<IPrint>().To<PrintToFile>().InTransientScope();
+                if (PrintType.Console ==a)
+                {
+                    kernel.Bind<IPrint>().To<PrintToConsole>().InTransientScope();// default
+                }
+                else if (PrintType.File == a)
+                {
+                    kernel.Bind<IPrint>().To<PrintToFile>().InTransientScope();
+                }
+                else
+                {
+                    kernel.Bind<IPrint>().To<PrintToConsole>().InTransientScope();
+                    kernel.Bind<IPrint>().To<PrintToFile>().InTransientScope();
+                }
             });
         }
+        public static void iocChange()
+        {
+            Console.WriteLine("To print log to console type c");
+            Console.WriteLine("To print log to file type f");
+            Console.WriteLine("To print log both ways type b");
+            switch (Console.ReadLine())
+            {
+                case "c":
+                    iocInit(PrintType.Console);
+                    break;
+                case "f":
+                    iocInit(PrintType.File);
+                    break;
+                case "b":
+                    iocInit(PrintType.Both);
+                    break;
+                default:
+                    Console.WriteLine("Wrong input");
+                    break;
+            }
+        }
+        public enum PrintType
+        {
+            Console,
+            File,
+            Both
+        };
     }
 }

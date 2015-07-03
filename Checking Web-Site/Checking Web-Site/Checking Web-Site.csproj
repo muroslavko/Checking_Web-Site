@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="IoC.cs" />
     <Compile Include="IPrint.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="PrintToConsole.cs" />
     <Compile Include="PrintToFile.cs" />
     <Compile Include="Program.cs" />
