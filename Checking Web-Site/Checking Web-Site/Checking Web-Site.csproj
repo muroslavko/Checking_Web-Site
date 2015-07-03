@@ -45,8 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoC.cs" />
+    <Compile Include="IPrint.cs" />
+    <Compile Include="PrintToConsole.cs" />
+    <Compile Include="PrintToFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSiteStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

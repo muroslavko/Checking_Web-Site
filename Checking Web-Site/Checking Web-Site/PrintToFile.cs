@@ -9,15 +9,12 @@ namespace Checking_Web_Site
 {
     class PrintToFile : IPrint
     {
-        private StreamWriter _file;
-
-        public PrintToFile()
-        {
-            _file = new StreamWriter("1.txt");
-        }
         public void Print(string s)
         {
-            _file.WriteLine(s);
+            using (StreamWriter file = new StreamWriter("1.txt"))
+            {
+                file.WriteLine(s);
+            }
         }
     }
 }
