@@ -53,13 +53,16 @@ namespace Checking_Web_Site
         }
         public static void iocChange()
         {
+            Console.WriteLine("******************************");
             Console.WriteLine("To print log to console type c");
             Console.WriteLine("To print log to file type f");
             Console.WriteLine("To print log both ways type b");
             IoC.Reset();
+            string input = Console.ReadLine();
+            Console.WriteLine("******************************");
             IoC.Init((kernel) =>
             {
-                switch (Console.ReadLine())
+                switch (input)
                 {
                     case "c":
                         kernel.Bind<IPrint>().To<PrintToConsole>().InTransientScope();
