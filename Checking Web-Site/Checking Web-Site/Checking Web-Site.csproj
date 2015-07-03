@@ -44,9 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpResponse.cs" />
     <Compile Include="IoC.cs" />
     <Compile Include="IPrint.cs" />
+    <Compile Include="IResponse.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="PingRespose.cs" />
     <Compile Include="PrintToConsole.cs" />
     <Compile Include="PrintToFile.cs" />
     <Compile Include="Program.cs" />
