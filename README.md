@@ -1,2 +1,7 @@
 # Checking_Web-Site
-Home Work BSA 15. .NET Lecture 4. Dependency Injection &amp; Inversion of Control
+Home Work Dependency Injection
+
+Консольное приложение:проверка доступности сайта http://dou.ua/.
+Логику проверки доступа выделить в отдельный класс.
+Реализовать несколько способов логирования: консоль, файл и комбинированный.
+Если доступен - писать, что доступен, если нет - выводить ошибку
